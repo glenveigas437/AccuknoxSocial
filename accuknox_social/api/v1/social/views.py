@@ -1,6 +1,7 @@
 from rest_framework import generics, status
-from .models import FriendRequest
+from .models import FriendRequest, Friends
 from .serializers import FriendRequestSerializer
+from ..users.serializers import UserSerializer
 from django_ratelimit.decorators import ratelimit
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -9,6 +10,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
+from ...utils import CustomPageNumberPagination
 
 User = get_user_model()
 
@@ -80,3 +82,26 @@ class AcceptRejectFriendRequestView(generics.CreateAPIView):
             return Response({'message': 'Friend request rejected.'}, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Invalid action parameter.'}, status=status.HTTP_400_BAD_REQUEST)
+
+class ListFriendsView(generics.ListAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
+    pagination_class = CustomPageNumberPagination
+
+    def get_queryset(self):
+        user = self.request.user
+        friends = Friends.objects.filter(user=user).values('friend')
+        friend_ids = [friend['friend'] for friend in friends]
+        friends_details = User.objects.filter(id__in=friend_ids)
+        return friends_details
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        all_friends=[]
+        for query in queryset:
+            all_friends.append({'email':query.email, 'Name': f'{query.first_name} {query.last_name}'})
+
+        page = self.paginate_queryset(all_friends)
+        if page is not None:
+            return self.get_paginated_response(page)
