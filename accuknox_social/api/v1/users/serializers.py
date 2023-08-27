@@ -29,3 +29,8 @@ class SignupSerializer(serializers.ModelSerializer):
 class CustomLoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
+
+class UserSerializer(serializers.Serializer):
+    class Meta:
+        model = User
+        fields = '__all__'
