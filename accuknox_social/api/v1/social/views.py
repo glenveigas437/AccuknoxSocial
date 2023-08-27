@@ -11,6 +11,7 @@ from django.db import models
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from ...utils import CustomPageNumberPagination
+from rest_framework.views import APIView
 
 User = get_user_model()
 
@@ -86,7 +87,6 @@ class AcceptRejectFriendRequestView(generics.CreateAPIView):
 class ListFriendsView(generics.ListAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-    serializer_class = UserSerializer
     pagination_class = CustomPageNumberPagination
 
     def get_queryset(self):
@@ -105,3 +105,33 @@ class ListFriendsView(generics.ListAPIView):
         page = self.paginate_queryset(all_friends)
         if page is not None:
             return self.get_paginated_response(page)
+        
+class PendingFriendRequestListView(generics.ListAPIView):
+    serializer_class = FriendRequestSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        # Query pending friend requests for the current user
+        pending_requests = FriendRequest.objects.filter(
+            recipient=user,
+            status='pending'
+        )
+        return pending_requests
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        all_pending_requests = []
+
+        for query in queryset:
+            requester = User.objects.get(id=query.requester_id)
+
+            pending_request_data = {
+                'email': requester.email,
+                'Name': f'{requester.first_name} {requester.last_name}',
+            }
+
+            all_pending_requests.append(pending_request_data)
+
+        return Response(all_pending_requests, status=status.HTTP_200_OK)
