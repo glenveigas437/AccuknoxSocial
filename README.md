@@ -38,6 +38,18 @@ With Docker installed
 - Run the Command: ```docker compose up -d db```
 - Create the Build: ```docker compose build```
 - Run: ```docker compose up```
+- Open Docker Desktop and look for the running service under db you will see the container ID copy that and Go to your Terminal and hit command: ```docker inspect <container_id>``` (Replace <container_id> with the Container ID you have copied and scroll down to fetch the IP Address.
+  <img width="1440" alt="Screenshot 2023-08-28 at 2 49 16 PM" src="https://github.com/glenveigas437/AccuknoxSocial/assets/31877827/b2c8c1b9-8022-43d7-bf04-0c8fcb6bf4a6">
+  <img width="1044" alt="Screenshot 2023-08-28 at 2 54 14 PM" src="https://github.com/glenveigas437/AccuknoxSocial/assets/31877827/f196e163-e502-4bc8-bd02-a5b9dcf78d36">
+
+
+- Now Open your Browser and go to [localhost:5050](http://localhost:5050/) and login wiht the credentials mentioned under pgadmin section of the docker-compose.yml file and create a new connection with the details mentioned under the db section of the docker-compose.yml file and in the host name enter the IP Address you fetched
+  <img width="1440" alt="Screenshot 2023-08-28 at 2 59 12 PM" src="https://github.com/glenveigas437/AccuknoxSocial/assets/31877827/0a680f10-2cb8-46e5-8846-00b269099f94">
+  <img width="1440" alt="Screenshot 2023-08-28 at 2 59 17 PM" src="https://github.com/glenveigas437/AccuknoxSocial/assets/31877827/860c2082-e072-4f5b-9294-9b3470298ff1">
+
+ - You can see all the tables populated during migration
+  <img width="1440" alt="Screenshot 2023-08-28 at 3 01 56 PM" src="https://github.com/glenveigas437/AccuknoxSocial/assets/31877827/0fc8d5cc-f847-4b83-871e-1391166248cc">
+
 Once you see the app is up and running you can play along with it.
 
 ## Load the [Postman json](https://github.com/glenveigas437/AccuknoxSocial/blob/main/Accuknox%20Social.postman_collection.json) collection in Postman and you can work along with the urls 
