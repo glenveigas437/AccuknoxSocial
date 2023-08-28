@@ -55,7 +55,8 @@ This ensures the user is authenticated and only Authenticated users can access t
 <img width="1319" alt="Screenshot 2023-08-27 at 11 39 07 PM" src="https://github.com/glenveigas437/AccuknoxSocial/assets/31877827/5674d15e-8a40-4541-821c-17c376c666b4">
 
 3) Log Out
-<img width="1319" alt="Screenshot 2023-08-27 at 11 39 07 PM" src="https://github.com/glenveigas437/AccuknoxSocial/assets/31877827/d55156f6-b0af-40f1-9c2f-9304f12ffec6">
+<img width="1440" alt="Screenshot 2023-08-27 at 11 48 16 PM" src="https://github.com/glenveigas437/AccuknoxSocial/assets/31877827/52133c7e-55af-4a64-a7e9-7e955e303a52">
+
 
 4) Add Friend
 After loading a number of users you can also send friend requests to them and add them to your friends list subject to acceptance of your friend request by the recipient.
