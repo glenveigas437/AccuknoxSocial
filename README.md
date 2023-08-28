@@ -40,7 +40,7 @@ With Docker installed
 - Run: ```docker compose up```
 Once you see the app is up and running you can play along with it.
 
-## Load the Postamn json collection in Postman and you can work along with the urls 
+## Load the [Postman json](https://github.com/glenveigas437/AccuknoxSocial/blob/main/Accuknox%20Social.postman_collection.json) collection in Postman and you can work along with the urls 
 
 ## Functionalities
 1) Sign Up
