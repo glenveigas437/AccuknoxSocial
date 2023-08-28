@@ -52,7 +52,7 @@ With Docker installed
 
 Once you see the app is up and running you can play along with it.
 
-## The IDs required in Adding Friends (User Id) and Accepting/Rejecting Friend Request can be fetched from the Database via SQL queries
+## The IDs required in Adding Friends (User Id) and Accepting/Rejecting Friend Request (Friend Request ID) can be fetched from the Database via SQL queries
 
 ## Load the [Postman json](https://github.com/glenveigas437/AccuknoxSocial/blob/main/Accuknox%20Social.postman_collection.json) collection in Postman and you can work along with the urls 
 
