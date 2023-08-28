@@ -1,5 +1,6 @@
-from django.urls import path, include
-from .views import SignupAPIView, LoginAPIView, LogoutAPIView, UserListAPIView
+from django.urls import include, path
+
+from .views import LoginAPIView, LogoutAPIView, SignupAPIView, UserListAPIView
 
 urlpatterns = [
     path('signup', SignupAPIView.as_view(), name='signup'),

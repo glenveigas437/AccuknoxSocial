@@ -1,6 +1,8 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
 from .models import FriendRequest, Friends
+
 
 @receiver(post_save, sender=FriendRequest)
 def create_friends_instance(sender, instance, **kwargs):

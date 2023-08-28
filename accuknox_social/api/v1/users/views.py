@@ -1,17 +1,18 @@
-from django.contrib.auth import get_user_model, authenticate, login
+from django.contrib.auth import authenticate, get_user_model, login
+from django.db import models
+from django.http import JsonResponse
 from rest_framework import generics, status
-from rest_framework.generics import CreateAPIView
-from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import SignupSerializer, CustomLoginSerializer
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
-from django.http import JsonResponse
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.views import APIView
-from django.db import models
+from rest_framework.generics import CreateAPIView
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import RefreshToken
+
 from ...utils import CustomPageNumberPagination
+from .serializers import CustomLoginSerializer, SignupSerializer
 
 User = get_user_model()
 
@@ -26,7 +27,7 @@ class LoginAPIView(ObtainAuthToken):
         serializer = self.serializer_class(data=request.data,
                                            context={'request': request})
         if serializer.is_valid():
-            email = serializer.validated_data['email']
+            email = serializer.validated_data['email'].lower()
             password = serializer.validated_data['password']
             user = authenticate(request=request, email=email, password=password)
 
