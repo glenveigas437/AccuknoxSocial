@@ -1,0 +1,275 @@
+{
+	"info": {
+		"_postman_id": "ab8b34be-43ae-434e-a60f-077c9f24747c",
+		"name": "Accuknox Social",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11494804"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Sign Up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"\",\n    \"password\": \"\",\n    \"first_name\": \"\",\n    \"last_name\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/users/signup",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"\",\n    \"password\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/users/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 07ec6ff66f751f0db7db38197cfe048921b5da43",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://0.0.0.0:8000/api/v1/users/logout",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Friend Requests",
+			"item": [
+				{
+					"name": "Add Friend",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 9d9d1d21ba414cc214b1241b1dd4667fa981110d",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://0.0.0.0:8000/api/v1/social/add_friend/239f0afe-dbed-459f-9825-7cd45edc1a29",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"social",
+								"add_friend",
+								"239f0afe-dbed-459f-9825-7cd45edc1a29"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Action on Friend Requests",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 1043e5a9f82adb1e462db5f7e1c1c83116abb8b9",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://0.0.0.0:8000/api/v1/social/response/ca494cfb-d5f3-429f-b627-6189530e721c?action=accept",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"social",
+								"response",
+								"ca494cfb-d5f3-429f-b627-6189530e721c"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "accept"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Pending Friend Requets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 1043e5a9f82adb1e462db5f7e1c1c83116abb8b9",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://0.0.0.0:8000/api/v1/social/pending-friend-requests",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"social",
+								"pending-friend-requests"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "List Friends",
+			"item": [
+				{
+					"name": "List All Friends",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "Search Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token e30ee8cfa6db329f9bbdf7647e0a94a6e0c77fd3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://0.0.0.0:8000/api/v1/users/all?search=JeffBezOs@gmail.com",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"all"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "JeffBezOs@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
