@@ -1,21 +1,20 @@
-from rest_framework import generics, status
-from .models import FriendRequest, Friends
-from .serializers import FriendRequestSerializer
-from ..users.serializers import UserSerializer
-from django_ratelimit.decorators import ratelimit
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
+from django_ratelimit.decorators import ratelimit
+from rest_framework import generics, status
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
 from ...utils import CustomPageNumberPagination
-from rest_framework.views import APIView
+from .models import FriendRequest, Friends
+from .serializers import FriendRequestSerializer
 
 User = get_user_model()
 
-@method_decorator(ratelimit(key='user', rate='3/m', block=True), name='dispatch')
+@method_decorator(ratelimit(key='user', rate='3/m', method='POST', block=True), name='dispatch')
 class FriendRequestView(generics.CreateAPIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -57,26 +56,22 @@ class AcceptRejectFriendRequestView(generics.CreateAPIView):
         except FriendRequest.DoesNotExist:
             return Response({'error': 'Friend request not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-        # Check if the request recipient is the current user
         if friend_request.recipient != request.user:
             return Response({'error': 'You do not have permission to perform this action.'}, status=status.HTTP_403_FORBIDDEN)
 
         if action == 'accept':
-            # Check if the friend request is pending
             if friend_request.status != 'pending':
                 return Response({'error': 'This friend request cannot be accepted.'}, status=status.HTTP_400_BAD_REQUEST)
 
-            # Update the friend request status to "accepted"
             friend_request.status = 'accepted'
             friend_request.save()
 
             return Response({'message': 'Friend request accepted.'}, status=status.HTTP_200_OK)
+        
         elif action == 'reject':
-            # Check if the friend request is pending
             if friend_request.status != 'pending':
                 return Response({'error': 'This friend request cannot be rejected.'}, status=status.HTTP_400_BAD_REQUEST)
 
-            # Update the friend request status to "rejected"
             friend_request.status = 'rejected'
             friend_request.save()
 
@@ -113,7 +108,6 @@ class PendingFriendRequestListView(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        # Query pending friend requests for the current user
         pending_requests = FriendRequest.objects.filter(
             recipient=user,
             status='pending'

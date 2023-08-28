@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import FriendRequestView, AcceptRejectFriendRequestView, ListFriendsView, PendingFriendRequestListView
+
+from .views import (AcceptRejectFriendRequestView, FriendRequestView,
+                    ListFriendsView, PendingFriendRequestListView)
 
 urlpatterns = [
     path('add_friend/<str:recipient_id>', FriendRequestView.as_view(), name='send-friend-request'),
