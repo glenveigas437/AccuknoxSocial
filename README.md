@@ -11,7 +11,7 @@ This is a social media application(Backend) built with Django and Django Rest Fr
 - Search for Users
 
 ### Installation
-- clone the repo using the command:
+- clone the repo using the command: ```https://github.com/glenveigas437/AccuknoxSocial.git```
 
 
 
